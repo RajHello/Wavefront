@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavefront</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="title">
+            Wavefront
+        </div>
+        
+        <div class="subtxt">
+            Riding the wave of productivity
+        </div>
+        
+        <hr>
+        
+        <div class="goals-completed">
+            <div class="progress-text">
+                Goals completed: <span id="completed">0</span>/<span id="total">0</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <div class="goal-input">
+            <button class="add-subject-btn" onclick="openModal()">+ ADD SUBJECTS</button>
+        </div>
+        
+        <div class="subjects-scroll-container">
+            <div class="subjects-container" id="subjectsContainer">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addSubjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Subject</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="addSubjectForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Subject Name</label>
+                    <input type="text" id="subjectName" placeholder="e.g., Mathematics" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Deadline (Optional)</label>
+                    <input type="date" id="subjectDeadline">
+                </div>
+
+                <div class="form-group">
+                    <label>Tasks</label>
+                    <div class="tasks-scroll-container">
+                        <div class="tasks-input" id="tasksInput">
+                            <div class="task-input-item">
+                                <input type="text" placeholder="Task 1" class="task-input" required>
+                                <button type="button" class="star-btn" onclick="toggleStar(this)">☆</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-task-btn" onclick="addTaskInput()">+ Add Task</button>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Subject</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="viewSubjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="viewSubjectName"></h2>
+                <button class="close-btn" onclick="closeViewModal()">&times;</button>
+            </div>
+            
+            <div id="viewSubjectTasks">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

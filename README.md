@@ -1,6 +1,8 @@
 🌊 Wavefront
 Because your brain has too many tabs open.
 
+Check it out at: https://wavefrontproductivity.netlify.app/
+
 
 Wavefront is here to save you from yourself. It’s a gorgeous, all-in-one productivity hub designed for students who want to actually get stuff done without looking at a UI that looks like a 1990s Excel spreadsheet.
 

@@ -49,3 +49,5 @@ If you find a bug or want to add a feature that makes this even sexier, open a P
 
 Made By:
 Poojan And Raj
+
+(will be adding new features in the last tab soon)

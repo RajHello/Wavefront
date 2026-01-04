@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavefront</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- TODO LIST VIEW -->
+    <div class="container" id="todoView">
+        <div class="title">
+            Wavefront
+        </div>
+        
+        <div class="subtxt">
+            Riding the wave of productivity
+        </div>
+        
+        <hr>
+        
+        <div class="goals-completed">
+            <div class="progress-text">
+                Goals completed: <span id="completed">0</span>/<span id="total">0</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <div class="goal-input">
+            <button class="add-subject-btn" onclick="openModal()">+ ADD SUBJECTS</button>
+        </div>
+        
+        <div class="subjects-scroll-container">
+            <div class="subjects-container" id="subjectsContainer">
+            </div>
+        </div>
+        
+        <!-- BOTTOM NAVIGATION INSIDE CONTAINER -->
+        <div class="container-bottom-nav">
+            <button class="container-nav-btn active" id="containerNavTodo" onclick="switchView('todo')">
+                <span class="container-nav-icon">📋</span>
+                <span class="container-nav-label">Todo</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn" id="containerNavPomodoro" onclick="switchView('pomodoro')">
+                <span class="container-nav-icon">⏱️</span>
+                <span class="container-nav-label">Focus</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn" id="containerNavPlaceholder" onclick="switchView('placeholder')">
+                <span class="container-nav-icon">⭐</span>
+                <span class="container-nav-label">More</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- POMODORO VIEW -->
+    <div class="container pomodoro-view" id="pomodoroView" style="display: none;">
+        <div class="pomodoro-content">
+            <div class="title">
+                Focus Timer
+            </div>
+            
+            <div class="subtxt">
+                Stay focused, stay productive
+            </div>
+            
+            <hr>
+
+            <!-- TIMER -->
+            <div class="pomodoro-timer" id="timerBox">
+                <span class="digit" id="min">25</span>
+                <span class="colon">:</span>
+                <span class="digit" id="sec">00</span>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="pomodoro-controls">
+                <button id="startBtn" class="primary">Start</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+            
+            <!-- SKIP CONTROLS -->
+            <div class="pomodoro-skip-controls">
+                <button id="skipToBreakBtn" class="skip-btn">Skip to Break</button>
+                <button id="skipToWorkBtn" class="skip-btn" style="display: none;">Skip to Work</button>
+            </div>
+
+            <!-- FOCUS MODE TOGGLE -->
+            <div class="pomodoro-top-bar">
+                <span>Focus Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="focusToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- SETTINGS SECTION -->
+            <div class="pomodoro-settings">
+                <div class="pomodoro-section">
+                    <p>Work: <span id="workLabel">25</span> min</p>
+                    <input type="range" id="workSlider" min="15" max="60" step="5" value="25">
+                </div>
+
+                <div class="pomodoro-section">
+                    <p>Break: <span id="breakLabel">5</span> min</p>
+                    <input type="range" id="breakSlider" min="5" max="30" step="5" value="5">
+                </div>
+            </div>
+
+            <!-- MUSIC -->
+            <div class="pomodoro-music">
+                <div class="music-info">
+                    <span class="music-icon">🎧</span>
+                    <span class="music-title">Lofi Focus</span>
+                    <div class="music-controls-group">
+                        <button class="music-control-btn" id="musicToggleBtn">Show Player</button>
+                        <button class="music-control-btn" id="musicVolumeBtn" title="Volume">🔊</button>
+                    </div>
+                </div>
+                <div class="music-volume-control" id="musicVolumeControl" style="display: none;">
+                    <input type="range" id="musicVolumeSlider" min="0" max="100" value="50" class="volume-slider">
+                    <span class="volume-value" id="volumeValue">50%</span>
+                </div>
+                <div class="music-player-container" id="musicPlayerContainer" style="display: none;">
+                    <iframe id="spotifyPlayer" 
+                        style="width: 100%; height: 100%; border: none; border-radius: 10px;" 
+                        src=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <p class="pomodoro-stats">
+                Focused: <span id="focusTime">0</span> min
+            </p>
+        </div>
+        
+        <!-- BOTTOM NAVIGATION INSIDE CONTAINER -->
+        <div class="container-bottom-nav">
+            <button class="container-nav-btn" id="containerNavTodo2" onclick="switchView('todo')">
+                <span class="container-nav-icon">📋</span>
+                <span class="container-nav-label">Todo</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn active" id="containerNavPomodoro2" onclick="switchView('pomodoro')">
+                <span class="container-nav-icon">⏱️</span>
+                <span class="container-nav-label">Focus</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn" id="containerNavPlaceholder2" onclick="switchView('placeholder')">
+                <span class="container-nav-icon">⭐</span>
+                <span class="container-nav-label">More</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PLACEHOLDER VIEW -->
+    <div class="container placeholder-view" id="placeholderView" style="display: none;">
+        <div class="title">
+            Coming Soon
+        </div>
+        
+        <div class="subtxt">
+            This feature is under development
+        </div>
+        
+        <hr>
+        
+        <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.6);">
+            <p>Stay tuned for updates!</p>
+        </div>
+        
+        <!-- BOTTOM NAVIGATION INSIDE CONTAINER -->
+        <div class="container-bottom-nav">
+            <button class="container-nav-btn" id="containerNavTodo3" onclick="switchView('todo')">
+                <span class="container-nav-icon">📋</span>
+                <span class="container-nav-label">Todo</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn" id="containerNavPomodoro3" onclick="switchView('pomodoro')">
+                <span class="container-nav-icon">⏱️</span>
+                <span class="container-nav-label">Focus</span>
+            </button>
+            <div class="container-nav-separator"></div>
+            <button class="container-nav-btn active" id="containerNavPlaceholder3" onclick="switchView('placeholder')">
+                <span class="container-nav-icon">⭐</span>
+                <span class="container-nav-label">More</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- FOCUS MODE VIEW -->
+    <div class="container focus-mode-view" id="focusModeView" style="display: none;">
+        <div class="focus-mode-header">
+            <div class="focus-mode-title">Focus Mode</div>
+            <div class="focus-mode-subtitle">Deep work session</div>
+        </div>
+        
+        <div class="focus-mode-timer">
+            <span class="focus-digit" id="focusMin">25</span>
+            <span class="focus-colon">:</span>
+            <span class="focus-digit" id="focusSec">00</span>
+        </div>
+        
+        <div class="focus-mode-controls">
+            <button id="focusStartBtn" class="focus-control-btn primary">Start</button>
+            <button id="focusExitBtn" class="focus-control-btn">Exit</button>
+        </div>
+    </div>
+
+
+    <!-- MODALS -->
+    <div class="modal" id="addSubjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Subject</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="addSubjectForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Subject Name</label>
+                    <input type="text" id="subjectName" placeholder="e.g., Mathematics" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Deadline (Optional)</label>
+                    <input type="date" id="subjectDeadline">
+                </div>
+
+                <div class="form-group">
+                    <label>Tasks</label>
+                    <div class="tasks-scroll-container">
+                        <div class="tasks-input" id="tasksInput">
+                            <div class="task-input-item">
+                                <input type="text" placeholder="Task 1" class="task-input" required>
+                                <button type="button" class="star-btn" onclick="toggleStar(this)">☆</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-task-btn" onclick="addTaskInput()">+ Add Task</button>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Subject</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="viewSubjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="viewSubjectName"></h2>
+                <button class="close-btn" onclick="closeViewModal()">&times;</button>
+            </div>
+            
+            <div id="viewSubjectTasks">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -55,7 +55,7 @@ A: You can, but *should* you? Maybe pass the three you have first.
 
 ## 🤝 Contributing
 
-If you find a bug or want to add a feature that makes this even sexier, open a Pull Request. Don't be weird about it.
+If you find a bug or want to add a feature  open a Pull Request.
 
 ---
 

@@ -1,4 +1,4 @@
-// ========== TODO LIST FUNCTIONALITY ==========
+
 let subjects = [];
 
 function loadFromStorage() {
